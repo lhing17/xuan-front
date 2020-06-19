@@ -62,7 +62,10 @@ const actions = {
           reject('getInfo: roles must be a non-null array!')
         }
 
-        commit('SET_ROLES', roles)
+        // 后台传来的role对象映射为roleName
+        const roleNames = roles.map(role => role.name)
+
+        commit('SET_ROLES', roleNames)
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
         commit('SET_INTRODUCTION', introduction)
