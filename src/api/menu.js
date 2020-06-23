@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function menuTree() {
   return request({
-    url: '/menu/tree',
+    url: '/sys/menu/tree',
     method: 'get'
   })
 }
