@@ -6,3 +6,15 @@ export function menuTree() {
     method: 'get'
   })
 }
+
+export function getList(current, size, params) {
+  return request({
+    url: '/sys/menu/list',
+    method: 'get',
+    params: {
+      ...params,
+      current,
+      size
+    }
+  })
+}

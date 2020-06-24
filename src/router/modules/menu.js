@@ -6,7 +6,7 @@ function convert(menus) {
   for (const menu of menus) {
     const convertedMenu = {
       path: menu.id.url,
-      component: () => import('@/views' + menu.id.url),
+      component: resolve => require([`@/views${menu.id.url}`], resolve),
       name: menu.id.name,
       meta: {
         title: menu.id.name,
