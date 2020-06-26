@@ -19,6 +19,7 @@
       :page="page"
       lazy
       :load="load"
+      :on-load="onLoad"
     >
       <template v-slot:icon="scope">
         <svg-icon :icon-class="scope.row.icon" />
@@ -89,7 +90,7 @@ export default {
     }
   },
   created() {
-    this.onLoad(this.page)
+
   },
   methods: {
     load(row, node, resolve) {

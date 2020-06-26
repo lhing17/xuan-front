@@ -68,6 +68,11 @@ export default {
       }
     },
     tableData: { type: Array, default: () => [] },
+    onLoad: {
+      type: Function, default: () => {
+        return () => null
+      }
+    },
     options: {
       type: Object, default: () => {
         return {}
@@ -90,6 +95,9 @@ export default {
       return result
     }
 
+  },
+  created() {
+    this.onLoad(this.page)
   },
   methods: {
     handleSizeChange(size) {
