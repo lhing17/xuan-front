@@ -17,6 +17,8 @@
       :table-data="tableData"
       :options="options"
       :page="page"
+      lazy
+      :load="load"
     >
       <template v-slot:icon="scope">
         <svg-icon :icon-class="scope.row.icon" />
@@ -29,7 +31,7 @@
 import XuanTable from '@/components/Xuan/table'
 
 const defaultFormThead = ['apple', 'banana']
-import { getList } from '@/api/menu'
+import { getList, getSublist } from '@/api/menu'
 import { menuType } from '@/utils/enum'
 
 export default {
@@ -90,6 +92,13 @@ export default {
     this.onLoad(this.page)
   },
   methods: {
+    load(row, node, resolve) {
+      console.log(row)
+      console.log(node)
+      getSublist({ parent: row.id }).then(
+        res => resolve(res.data)
+      )
+    },
     handleSizeChange() {
 
     },
@@ -99,7 +108,9 @@ export default {
     onLoad(page, params = {}) {
       getList(page.current, page.size, Object.assign(params, this.query)).then(
         res => {
+          console.log(res)
           this.tableData = res.data.content
+          this.$set(this.page, 'total', res.data.totalElements)
         }
       )
     }

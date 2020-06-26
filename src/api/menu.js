@@ -18,3 +18,11 @@ export function getList(current, size, params) {
     }
   })
 }
+
+export function getSublist(params) {
+  return request({
+    url: '/sys/menu/sublist',
+    method: 'get',
+    params
+  })
+}

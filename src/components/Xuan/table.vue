@@ -19,7 +19,17 @@
       </el-button-group>
     </div>
     <!--  数据表格  -->
-    <el-table :data="tableData" border fit highlight-current-row style="width: 100%">
+    <el-table
+      border
+      fit
+      highlight-current-row
+      row-key="id"
+      :data="tableData"
+      :lazy="lazy"
+      :load="load"
+      :tree-props="{hasChildren: 'hasChildren'}"
+      style="width: 100%"
+    >
       <el-table-column v-if="realOptions.selection" type="selection" width="55" />
       <el-table-column
         v-for="column in realOptions.columns"
@@ -51,6 +61,12 @@
 export default {
   name: 'XuanTable',
   props: {
+    lazy: { type: Boolean, default: () => false },
+    load: {
+      type: Function, default: () => {
+        return () => null
+      }
+    },
     tableData: { type: Array, default: () => [] },
     options: {
       type: Object, default: () => {
