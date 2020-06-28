@@ -1,31 +1,17 @@
 <template>
-  <div class="app-container">
-    <div class="filter-container">
-      <el-checkbox-group v-model="checkboxVal">
-        <el-checkbox label="apple">
-          apple
-        </el-checkbox>
-        <el-checkbox label="banana">
-          banana
-        </el-checkbox>
-        <el-checkbox label="orange">
-          orange
-        </el-checkbox>
-      </el-checkbox-group>
-    </div>
-    <xuan-table
-      :table-data="tableData"
-      :options="options"
-      :page="page"
-      lazy
-      :load="load"
-      :on-load="onLoad"
-    >
-      <template v-slot:icon="scope">
-        <svg-icon :icon-class="scope.row.icon" />
-      </template>
-    </xuan-table>
-  </div>
+  <xuan-table
+    :table-data="tableData"
+    :options="options"
+    :page="page"
+    lazy
+    :load="load"
+    :on-load="onLoad"
+    @refresh="handleRefresh"
+  >
+    <template v-slot:icon="scope">
+      <svg-icon :icon-class="scope.row.icon" />
+    </template>
+  </xuan-table>
 </template>
 
 <script>
@@ -55,7 +41,8 @@ export default {
         columns: [
           {
             prop: 'name',
-            label: '名称'
+            label: '名称',
+            search: true
           },
           {
             prop: 'url',
@@ -72,6 +59,11 @@ export default {
             formatter: (row, column, cellValue) => {
               return menuType[cellValue]
             }
+          },
+          {
+            prop: 'order',
+            label: '排序',
+            show: false
           },
           {
             prop: 'permission',
@@ -114,6 +106,10 @@ export default {
           this.$set(this.page, 'total', res.data.totalElements)
         }
       )
+    },
+    handleRefresh() {
+      this.onLoad(this.page)
+      console.log('refreshed')
     }
   }
 }

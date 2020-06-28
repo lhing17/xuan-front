@@ -1,0 +1,13 @@
+.xuan-header-cell {
+  background-color: #fafafa !important;
+}
+
+.xuan-search-container {
+  .el-collapse-item__header {
+    display: none;
+  }
+
+  .el-collapse, .el-collapse-item__wrap {
+    border: 0;
+  }
+}
