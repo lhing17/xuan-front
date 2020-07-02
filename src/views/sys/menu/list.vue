@@ -6,7 +6,9 @@
     lazy
     :load="load"
     :on-load="onLoad"
+    :query.sync="query"
     @refresh="handleRefresh"
+    @search="handleSearch"
   >
     <template v-slot:icon="scope">
       <svg-icon :icon-class="scope.row.icon" />
@@ -46,7 +48,8 @@ export default {
           },
           {
             prop: 'url',
-            label: 'url'
+            label: 'url',
+            search: true
           },
           {
             prop: 'icon',
@@ -109,7 +112,10 @@ export default {
     },
     handleRefresh() {
       this.onLoad(this.page)
-      console.log('refreshed')
+    },
+    handleSearch() {
+      console.log(this.query)
+      this.onLoad(this.page)
     }
   }
 }

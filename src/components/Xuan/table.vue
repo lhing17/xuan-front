@@ -4,12 +4,17 @@
     <div class="xuan-search-container">
       <el-collapse v-model="collapse">
         <el-collapse-item name="search">
-          <el-row>
-            <el-col v-for="column in searchColumns" :key="column.prop" span="4">
-              <span>{{ column.label }}</span>
-              <el-input v-model="query[column.prop]" />
+          <el-form :model="query">
+            <el-col v-for="column in searchColumns" :key="column.prop" :span="4">
+              <el-form-item :label="column.label" label-width="80px">
+                <el-input v-model="query[column.prop]" @input="handleInput" />
+              </el-form-item>
             </el-col>
-          </el-row>
+            <el-col :span="8" class="xuan-search-button-group">
+              <el-button type="primary" plain @click="handleSearch">搜索</el-button>
+              <!--<el-button>清空</el-button>-->
+            </el-col>
+          </el-form>
         </el-collapse-item>
       </el-collapse>
     </div>
@@ -111,6 +116,11 @@ export default {
         return {}
       }
     },
+    query: {
+      type: Object, default: () => {
+        return {}
+      }
+    },
     page: {
       type: Object, default: () => {
         return {
@@ -195,6 +205,12 @@ export default {
       } else {
         this.collapse = []
       }
+    },
+    handleInput() {
+      this.$emit('update:query', this.query)
+    },
+    handleSearch() {
+      this.$emit('search')
     }
   }
 }
@@ -218,5 +234,9 @@ export default {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 5px;
+  }
+
+  .xuan-search-button-group {
+    text-align: center;
   }
 </style>
