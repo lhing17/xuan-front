@@ -19,8 +19,7 @@
 <script>
 import XuanTable from '@/components/Xuan/table'
 
-const defaultFormThead = ['apple', 'banana']
-import { getList, getSublist } from '@/api/menu'
+import { getList, getSublist } from '@/api/sys/menu'
 import { menuType } from '@/utils/enum'
 
 export default {
@@ -36,9 +35,6 @@ export default {
       // 查询参数
       query: {},
       tableData: [],
-      key: 1, // table key
-      formTheadOptions: ['apple', 'banana', 'orange'],
-      checkboxVal: defaultFormThead, // checkboxVal
       options: {
         columns: [
           {
@@ -79,11 +75,7 @@ export default {
       }
     }
   },
-  watch: {
-    checkboxVal(valArr) {
-      this.key = this.key + 1// 为了保证table 每次都会重渲 In order to ensure the table will be re-rendered each time
-    }
-  },
+  watch: {},
   created() {
 
   },

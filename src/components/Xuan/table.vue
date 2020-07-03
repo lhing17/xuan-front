@@ -11,7 +11,9 @@
               </el-form-item>
             </el-col>
             <el-col :span="8" class="xuan-search-button-group">
-              <el-button type="primary" plain @click="handleSearch">搜索</el-button>
+              <el-form-item>
+                <el-button type="primary" plain @click="handleSearch">搜索</el-button>
+              </el-form-item>
               <!--<el-button>清空</el-button>-->
             </el-col>
           </el-form>
@@ -237,6 +239,7 @@ export default {
   }
 
   .xuan-search-button-group {
-    text-align: center;
+    padding-left: 10px;
+    /*text-align: center;*/
   }
 </style>

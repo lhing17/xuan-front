@@ -1,5 +1,5 @@
 import Layout from '@/layout'
-import { menuTree } from '@/api/menu'
+import { menuTree } from '@/api/sys/menu'
 
 function convert(menus) {
   const convertedMenus = []

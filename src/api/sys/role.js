@@ -7,10 +7,15 @@ export function getRoutes() {
   })
 }
 
-export function getRoles() {
+export function getList(current, size, params) {
   return request({
-    url: '/vue-element-admin/roles',
-    method: 'get'
+    url: '/sys/role/list',
+    method: 'get',
+    params: {
+      ...params,
+      current,
+      size
+    }
   })
 }
 
