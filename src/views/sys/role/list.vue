@@ -1,24 +1,35 @@
 <template>
-  <xuan-table
-    :table-data="tableData"
-    :options="options"
-    :page="page"
-    :on-load="onLoad"
-    :query.sync="query"
-    @refresh="handleRefresh"
-    @search="handleSearch"
-  />
+  <div>
+    <xuan-table
+      :table-data="tableData"
+      :options="options"
+      :page="page"
+      :on-load="onLoad"
+      :query.sync="query"
+      @refresh="handleRefresh"
+      @search="handleSearch"
+      @show-form="handleShowForm"
+    />
+    <xuan-form
+      :visible.sync="dialogVisible"
+      :form.sync="form"
+      :options="options"
+    />
+  </div>
 </template>
 
 <script>
 import XuanTable from '@/components/Xuan/table'
 import { getList } from '@/api/sys/role'
+import XuanForm from '@/components/Xuan/form'
 
 export default {
   name: 'RoleList',
-  components: { XuanTable },
+  components: { XuanForm, XuanTable },
   data() {
     return {
+      dialogVisible: false,
+      form: {},
       page: {
         current: 1,
         size: 20,
@@ -55,6 +66,9 @@ export default {
     },
     handleSearch() {
       this.onLoad(this.page)
+    },
+    handleShowForm() {
+      this.dialogVisible = true
     }
   }
 }

@@ -23,7 +23,7 @@
     <el-row class="up-table-container">
       <!--  左上角按钮区  -->
       <el-col :span="12" class="operation-container">
-        <el-button type="primary" plain icon="el-icon-plus">新增</el-button>
+        <el-button type="primary" plain icon="el-icon-plus" @click="handleShowForm">新增</el-button>
       </el-col>
       <!--  右上角工具栏区  -->
       <el-col :span="12" class="tool-container">
@@ -213,6 +213,9 @@ export default {
     },
     handleSearch() {
       this.$emit('search')
+    },
+    handleShowForm() {
+      this.$emit('showForm')
     }
   }
 }
