@@ -14,6 +14,7 @@
       :visible.sync="dialogVisible"
       :form.sync="form"
       :options="options"
+      @add="handleAdd"
     />
   </div>
 </template>
@@ -69,6 +70,9 @@ export default {
     },
     handleShowForm() {
       this.dialogVisible = true
+    },
+    handleAdd() {
+      console.log(this.form)
     }
   }
 }

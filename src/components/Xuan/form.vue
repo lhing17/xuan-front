@@ -60,7 +60,7 @@ export default {
       this.handleClose()
     },
     handleSubmit() {
-      this.$emit()
+      this.$emit('add')
     }
   }
 

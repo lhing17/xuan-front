@@ -215,7 +215,7 @@ export default {
       this.$emit('search')
     },
     handleShowForm() {
-      this.$emit('showForm')
+      this.$emit('show-form')
     }
   }
 }
