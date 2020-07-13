@@ -1,6 +1,6 @@
 <template>
   <el-dialog title="新增" :visible.sync="dialogVisible" :before-close="handleClose">
-    <el-form :model="form">
+    <el-form :model="form" :rules="rules">
       <el-col v-for="column in formColumns" :key="column.prop" :span="12">
         <el-form-item :label="column.label" label-width="80px">
           <el-input v-model="form[column.prop]" @input="handleInput" />
@@ -47,6 +47,14 @@ export default {
     },
     dialogVisible() {
       return this.visible
+    },
+    rules() {
+      const data = {}
+      for (const column of this.formColumns) {
+        const key = column.prop
+        data[key] = column.rules
+      }
+      return data
     }
   },
   methods: {
