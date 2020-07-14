@@ -35,6 +35,13 @@ export function updateRole(data) {
   })
 }
 
+export function getRole(id) {
+  return request({
+    url: `/sys/role/get/${id}`,
+    method: 'get'
+  })
+}
+
 export function deleteRole(id) {
   return request({
     url: `/vue-element-admin/role/${id}`,

@@ -14,14 +14,14 @@
       :visible.sync="dialogVisible"
       :form.sync="form"
       :options="options"
-      @add="handleAdd"
+      @submit="handleSubmit"
     />
   </div>
 </template>
 
 <script>
 import XuanTable from '@/components/Xuan/table'
-import { addRole, updateRole, getList } from '@/api/sys/role'
+import { addRole, updateRole, getRole, getList } from '@/api/sys/role'
 import XuanForm from '@/components/Xuan/form'
 
 export default {
@@ -80,12 +80,20 @@ export default {
     handleSearch() {
       this.onLoad(this.page)
     },
-    handleShowForm() {
+    handleShowForm(row) {
       this.dialogVisible = true
+      if (row) {
+        getRole(row.id).then(
+          res => {
+            this.form = res.data
+          }
+        )
+      }
     },
-    handleAdd() {
+    handleSubmit() {
       this.loading = true
-      addRole(this.form).then(
+      const submit = this.form.id ? updateRole : addRole
+      submit(this.form).then(
         () => {
           this.$message({
             message: '操作成功',

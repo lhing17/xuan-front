@@ -76,7 +76,7 @@ export default {
     handleSubmit() {
       this.$refs['form'].validate(valid => {
         if (valid) {
-          this.$emit('add')
+          this.$emit('submit')
         } else {
           return false
         }

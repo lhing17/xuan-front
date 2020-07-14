@@ -66,7 +66,15 @@
         <template v-if="column.slot" v-slot:default="scope">
           <slot :name="column.prop" :row="scope.row" :column="scope.column" :$index="scope.$index" />
         </template>
-
+      </el-table-column>
+      <el-table-column
+        fixed="right"
+        label="操作"
+        width="100"
+      >
+        <template #default="scope">
+          <el-button icon="el-icon-edit" type="text" @click="handleShowEditForm(scope.row)">编辑</el-button>
+        </template>
       </el-table-column>
     </el-table>
     <!--  分页组件  -->
@@ -185,7 +193,6 @@ export default {
       this.$emit('refresh')
     },
     handleTransfer(value, direction, keys) {
-      console.log(value, direction, keys)
       for (let i = 0; i < this.options.columns.length; i++) {
         const column = this.options.columns[i]
         if (keys.includes(column.prop)) {
@@ -196,7 +203,6 @@ export default {
           }
         }
       }
-      console.log(this.options)
     },
     handleToggleFields() {
       this.dialogVisible = true
@@ -216,6 +222,9 @@ export default {
     },
     handleShowForm() {
       this.$emit('show-form')
+    },
+    handleShowEditForm(row) {
+      this.$emit('show-form', row)
     }
   }
 }
