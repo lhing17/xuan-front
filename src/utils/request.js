@@ -1,8 +1,8 @@
 import axios from 'axios'
-import {MessageBox, Message} from 'element-ui'
+import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
-import {getToken} from '@/utils/auth'
-import qs from 'qs' // url参数转换
+import { getToken } from '@/utils/auth'
+import { serialize } from '@/utils/index' // url参数转换
 
 // create an axios instance
 const service = axios.create({
@@ -22,9 +22,9 @@ service.interceptors.request.use(
       // please modify it according to the actual situation
       config.headers['Authorization'] = getToken()
     }
-    // if (config.method === 'post') {
-    //   config.data = serialize(config.data)
-    // }
+    if (config.method === 'post') {
+      config.data = serialize(config.data)
+    }
     return config
   },
   error => {

@@ -21,15 +21,15 @@ export function getList(current, size, params) {
 
 export function addRole(data) {
   return request({
-    url: '/vue-element-admin/role',
+    url: '/sys/role/add',
     method: 'post',
     data
   })
 }
 
-export function updateRole(id, data) {
+export function updateRole(data) {
   return request({
-    url: `/vue-element-admin/role/${id}`,
+    url: `/sys/role/update`,
     method: 'put',
     data
   })

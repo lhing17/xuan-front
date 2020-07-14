@@ -21,7 +21,7 @@
 
 <script>
 import XuanTable from '@/components/Xuan/table'
-import { getList } from '@/api/sys/role'
+import { addRole, updateRole, getList } from '@/api/sys/role'
 import XuanForm from '@/components/Xuan/form'
 
 export default {
@@ -43,11 +43,23 @@ export default {
           {
             prop: 'name',
             label: '名称',
-            search: true
+            search: true,
+            rules: [{
+              required: true,
+              message: '请输入角色名称',
+              trigger: 'blur'
+            }]
           },
           {
             prop: 'description',
-            label: '描述'
+            label: '描述',
+            rules: [
+              {
+                required: true,
+                message: '请输入角色描述',
+                trigger: 'blur'
+              }
+            ]
           }
         ]
       }
@@ -72,7 +84,21 @@ export default {
       this.dialogVisible = true
     },
     handleAdd() {
-      console.log(this.form)
+      this.loading = true
+      addRole(this.form).then(
+        () => {
+          this.$message({
+            message: '操作成功',
+            type: 'success'
+          })
+          this.onLoad(this.page)
+          this.loading = false
+          this.dialogVisible = false
+        }
+      ).catch(() => {
+        this.loading = false
+        this.dialogVisible = false
+      })
     }
   }
 }

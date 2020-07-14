@@ -1,9 +1,9 @@
 <template>
   <el-dialog title="新增" :visible.sync="dialogVisible" :before-close="handleClose">
-    <el-form :model="form" :rules="rules">
+    <el-form ref="form" :model="form" :rules="rules">
       <el-col v-for="column in formColumns" :key="column.prop" :span="12">
-        <el-form-item :label="column.label" label-width="80px">
-          <el-input v-model="form[column.prop]" @input="handleInput" />
+        <el-form-item :label="column.label" label-width="80px" :prop="column.prop">
+          <el-input v-model="form[column.prop]" :placeholder="column.placeholder" @input="handleInput" />
         </el-form-item>
       </el-col>
       <el-col :span="8" :offset="16" class="xuan-submit-button-group">
@@ -43,7 +43,13 @@ export default {
       return Object.assign(defaultOptions, this.options)
     },
     formColumns() {
-      return this.realOptions.columns
+      const columns = this.realOptions.columns
+      for (const column of columns) {
+        if (!column.placeholder) {
+          column.placeholder = '请输入' + column.label
+        }
+      }
+      return columns
     },
     dialogVisible() {
       return this.visible
@@ -68,7 +74,13 @@ export default {
       this.handleClose()
     },
     handleSubmit() {
-      this.$emit('add')
+      this.$refs['form'].validate(valid => {
+        if (valid) {
+          this.$emit('add')
+        } else {
+          return false
+        }
+      })
     }
   }
 
