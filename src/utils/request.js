@@ -22,7 +22,7 @@ service.interceptors.request.use(
       // please modify it according to the actual situation
       config.headers['Authorization'] = getToken()
     }
-    if (config.method !== 'get') {
+    if (config.method !== 'get' && config.data) {
       config.data = serialize(config.data)
     }
     return config

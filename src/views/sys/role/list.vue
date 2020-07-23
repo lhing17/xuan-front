@@ -9,6 +9,7 @@
       @refresh="handleRefresh"
       @search="handleSearch"
       @show-form="handleShowForm"
+      @delete="handleDelete"
     />
     <xuan-form
       :visible.sync="dialogVisible"
@@ -21,7 +22,7 @@
 
 <script>
 import XuanTable from '@/components/Xuan/table'
-import { addRole, updateRole, getRole, getList } from '@/api/sys/role'
+import { addRole, updateRole, getRole, getList, deleteRole } from '@/api/sys/role'
 import XuanForm from '@/components/Xuan/form'
 
 export default {
@@ -89,6 +90,23 @@ export default {
           }
         )
       }
+    },
+    handleDelete(row) {
+      this.$confirm('确定将选择数据删除?', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(() => {
+          return deleteRole(row.id)
+        })
+        .then(() => {
+          this.onLoad(this.page)
+          this.$message({
+            type: 'success',
+            message: '操作成功!'
+          })
+        })
     },
     handleSubmit() {
       this.loading = true

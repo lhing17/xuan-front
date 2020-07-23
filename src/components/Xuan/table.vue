@@ -73,7 +73,27 @@
         width="100"
       >
         <template #default="scope">
-          <el-button icon="el-icon-edit" type="text" @click="handleShowEditForm(scope.row)">编辑</el-button>
+          <el-tooltip
+            placement="top"
+            content="编辑"
+          >
+            <el-button
+              icon="el-icon-edit"
+              type="text"
+              @click="handleShowEditForm(scope.row)"
+            />
+
+          </el-tooltip>
+          <el-tooltip
+            placement="top"
+            content="删除"
+          >
+            <el-button
+              icon="el-icon-delete"
+              type="text"
+              @click="handleDelete(scope.row)"
+            />
+          </el-tooltip>
         </template>
       </el-table-column>
     </el-table>
@@ -225,6 +245,9 @@ export default {
     },
     handleShowEditForm(row) {
       this.$emit('show-form', row)
+    },
+    handleDelete(row) {
+      this.$emit('delete', row)
     }
   }
 }
