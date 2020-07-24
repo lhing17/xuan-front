@@ -5,28 +5,28 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
 import adminDashboard from './admin'
 import editorDashboard from './editor'
 
 export default {
   name: 'Dashboard',
-  components: {adminDashboard, editorDashboard},
+  components: { adminDashboard, editorDashboard },
   data() {
     return {
-      currentRole: 'adminDashboard',
+      currentRole: 'adminDashboard'
     }
   },
   computed: {
     ...mapGetters([
-      'roles',
-    ]),
+      'roles'
+    ])
   },
   created() {
     console.log(this.roles)
     if (!this.roles.includes('admin')) {
       this.currentRole = 'editorDashboard'
     }
-  },
+  }
 }
 </script>
